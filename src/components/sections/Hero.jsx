@@ -10,8 +10,7 @@ const rings = [
     name: 'Titanium Stealth',
     tagline: 'Forged for absolute durability.',
     price: '$349',
-    // Start with a forward slash to point to the public folder
-    image: '/p1.jpg', 
+    image: '/p1.jpg',
   },
   {
     id: 'gold',
@@ -99,27 +98,28 @@ export default function Hero() {
           
           <div className="relative w-[240px] h-[240px] md:w-[320px] md:h-[320px]">
             <AnimatePresence mode="wait">
+              {/* OUTER DIV: Handles the Mount/Unmount Morph Transition */}
               <motion.div
                 key={currentRing.id}
-                initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)', y: 0 }}
-                // Added a continuous floating 'y' animation
-                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)', y: [0, -10, 0] }}
-                exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)', y: 0 }}
-                transition={{ 
-                  // Separate transition configs so the entrance is fast, but the float is slow and infinite
-                  opacity: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-                  scale: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-                  filter: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-                  y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-                }}
+                initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0 flex items-center justify-center"
               >
-                <div className="absolute inset-0 scale-[1.05] bg-white/40 backdrop-blur-lg rounded-full shadow-xl border border-white/50" />
-                <img
-                  src={currentRing.image}
-                  alt={currentRing.name}
-                  className="relative w-full h-full object-cover rounded-full shadow-[0_15px_30px_-10px_rgba(62,39,35,0.3)] border-2 border-white/80"
-                />
+                {/* INNER DIV: Handles the Infinite Float so it doesn't break the exit animation */}
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 flex items-center justify-center w-full h-full"
+                >
+                  <div className="absolute inset-0 scale-[1.05] bg-white/40 backdrop-blur-lg rounded-full shadow-xl border border-white/50" />
+                  <img
+                    src={currentRing.image}
+                    alt={currentRing.name}
+                    className="relative w-full h-full object-cover rounded-full shadow-[0_15px_30px_-10px_rgba(62,39,35,0.3)] border-2 border-white/80"
+                  />
+                </motion.div>
               </motion.div>
             </AnimatePresence>
           </div>
