@@ -6,20 +6,20 @@ export default function Accordion({ question, answer }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-espresso-300">
+    <div className="border-b border-zinc-200">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-5 text-left gap-4 group"
+        className="w-full flex items-center justify-between py-6 text-left gap-4 group cursor-pointer outline-none"
       >
-        <span className="font-serif text-lg text-espresso-800 group-hover:text-espresso-600 transition-colors duration-200">
+        <span className="font-serif text-xl text-zinc-900 group-hover:text-teal-600 transition-colors duration-200">
           {question}
         </span>
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="flex-shrink-0 text-espresso-600"
+          className="flex-shrink-0 text-zinc-400 group-hover:text-teal-600"
         >
-          {open ? <Minus size={18} /> : <Plus size={18} />}
+          {open ? <Minus size={20} /> : <Plus size={20} />}
         </motion.span>
       </button>
 
@@ -33,7 +33,7 @@ export default function Accordion({ question, answer }) {
             transition={{ duration: 0.35, ease: [0.04, 0.62, 0.23, 0.98] }}
             className="overflow-hidden"
           >
-            <p className="font-sans text-espresso-600 text-sm leading-relaxed pb-5 pr-8">
+            <p className="font-sans text-zinc-500 text-base leading-relaxed pb-6 pr-8">
               {answer}
             </p>
           </motion.div>

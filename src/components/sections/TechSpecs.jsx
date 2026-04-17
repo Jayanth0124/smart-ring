@@ -1,125 +1,187 @@
 import { motion } from 'framer-motion';
-import { Cpu, Radio, Battery, Shield } from 'lucide-react';
-import Badge from '../ui/Badge';
+import { Cpu, Radio, Battery, Shield, Crosshair } from 'lucide-react';
 
-const specs = [
+const systems = [
   {
-    category: 'Sensors',
+    id: "SYS.01",
+    category: 'Sensory Array',
     icon: Radio,
-    items: ['PPG Optical Heart Rate', 'Red + Infrared SpO₂', 'NTC Temperature Sensor', '3-Axis Accelerometer', 'Capacitive Touch'],
+    items: [
+      { label: 'PPG Optical', val: '6-Channel' },
+      { label: 'Thermal', val: 'NTC ±0.1°C' },
+      { label: 'Motion', val: '6-Axis IMU' },
+      { label: 'SpO2', val: 'Red/IR LED' }
+    ],
   },
   {
-    category: 'Processor',
+    id: "SYS.02",
+    category: 'Processing Core',
     icon: Cpu,
-    items: ['Dual-Core ARM Cortex-M4', '512KB Flash Memory', 'Ultra-low-power DSP', 'Real-time Analytics'],
+    items: [
+      { label: 'Architecture', val: 'ARM Cortex-M4' },
+      { label: 'Flash Memory', val: '512KB' },
+      { label: 'Analytics', val: 'On-board DSP' },
+      { label: 'Security', val: 'AES-256' }
+    ],
   },
   {
-    category: 'Power',
+    id: "SYS.03",
+    category: 'Power Matrix',
     icon: Battery,
-    items: ['72-hour continuous use', '7-day standard mode', 'Wireless charging dock', 'Charges in 80 minutes'],
+    items: [
+      { label: 'Capacity', val: '14.5 - 21.5mAh' },
+      { label: 'Lifespan', val: '168 Hours' },
+      { label: 'Charging', val: 'Magnetic Inductive' },
+      { label: '0-100%', val: '< 80 Minutes' }
+    ],
   },
   {
-    category: 'Build',
+    id: "SYS.04",
+    category: 'Chassis & Build',
     icon: Shield,
-    items: ['Grade 5 Titanium shell', 'Scratch-resistant coating', 'Water-resistant 100m', 'Polished inner band'],
+    items: [
+      { label: 'Exoskeleton', val: 'Grade 5 Titanium' },
+      { label: 'Internal', val: 'Medical Resin' },
+      { label: 'Water Rating', val: '10 ATM (100m)' },
+      { label: 'Coating', val: 'PVD Vapor' }
+    ],
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-};
-
 export default function TechSpecs() {
   return (
-    <section id="technology" className="bg-espresso-800 py-24 md:py-32 px-6 md:px-10">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <Badge className="bg-espresso-700 text-espresso-100">Inside The Ring</Badge>
-          <h2 className="mt-5 font-serif text-4xl md:text-5xl font-medium text-espresso-50 tracking-tight">
-            Engineered to
-            <br />
-            <em className="italic text-espresso-300">hospital standards.</em>
-          </h2>
-          <p className="mt-4 font-sans text-base text-espresso-400 max-w-lg mx-auto leading-relaxed">
-            Every component inside AURA was chosen for precision, longevity, and minimal footprint —
-            packed into an 8-gram shell.
-          </p>
-        </motion.div>
+    <section id="technology" className="relative bg-zinc-950 py-32 overflow-hidden text-white border-y border-zinc-900">
+      
+      {/* Futuristic Grid Background */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" 
+           style={{ backgroundImage: 'linear-gradient(#27272a 1px, transparent 1px), linear-gradient(90deg, #27272a 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-        <div className="relative">
-          <div className="hidden lg:flex absolute inset-0 items-center justify-center pointer-events-none">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="w-48 h-48 rounded-full border-2 border-espresso-600 opacity-20"
-            />
+      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+        
+        {/* HUD Style Header */}
+        <div className="flex flex-col items-center text-center mb-24">
+          <div className="flex items-center gap-3 mb-6">
+            <Crosshair size={16} className="text-teal-400 animate-pulse" />
+            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-teal-400">
+              Hardware Architecture Diagram
+            </span>
           </div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-          >
-            {specs.map((spec) => (
-              <motion.div
-                key={spec.category}
-                variants={itemVariants}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="border border-espresso-600/50 bg-espresso-700/30 backdrop-blur-sm p-6 group"
-              >
-                <div className="w-10 h-10 border border-espresso-600 flex items-center justify-center mb-5 group-hover:border-espresso-400 transition-colors duration-300">
-                  <spec.icon size={18} strokeWidth={1.5} className="text-espresso-300" />
-                </div>
-                <h3 className="font-serif text-lg text-espresso-100 mb-4">{spec.category}</h3>
-                <ul className="space-y-2">
-                  {spec.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="w-1 h-1 bg-espresso-500 rounded-full mt-2 flex-shrink-0" />
-                      <span className="font-sans text-xs text-espresso-400 leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </motion.div>
+          <h2 className="font-serif text-5xl md:text-7xl font-medium text-white tracking-tight leading-none mb-6">
+            System <em className="italic text-zinc-500">Schematics.</em>
+          </h2>
+          <p className="font-mono text-xs text-zinc-400 tracking-widest uppercase max-w-xl mx-auto leading-relaxed">
+            Miniaturized clinical-grade telemetry. <br/> Operating within an 8-gram titanium enclosure.
+          </p>
         </div>
 
+        {/* Central Layout: Grid + Radar */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Panel Systems */}
+          <div className="space-y-6">
+            {systems.slice(0, 2).map((sys, idx) => (
+              <SystemCard key={sys.id} sys={sys} delay={idx * 0.2} />
+            ))}
+          </div>
+
+          {/* Central Radar/Scanner Animation */}
+          <div className="relative flex justify-center items-center h-[400px]">
+            {/* Outer Rotating Dashed Ring */}
+            <motion.div 
+              animate={{ rotate: 360 }} 
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              className="absolute w-[320px] h-[320px] rounded-full border border-dashed border-teal-500/40"
+            />
+            {/* Inner Rotating Ring (Reverse) */}
+            <motion.div 
+              animate={{ rotate: -360 }} 
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+              className="absolute w-[260px] h-[260px] rounded-full border border-zinc-700"
+            />
+            
+            {/* The Ring Image */}
+            <div className="relative w-48 h-48 rounded-full overflow-hidden border-2 border-zinc-800 shadow-[0_0_50px_rgba(20,184,166,0.15)] z-10 bg-zinc-900">
+              <img src="/p1.jpg" alt="Ring Top View" className="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700" />
+              
+              {/* Scanning Laser Line */}
+              <motion.div 
+                animate={{ top: ['-10%', '110%', '-10%'] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="absolute left-0 right-0 h-[2px] bg-teal-400 shadow-[0_0_15px_#2dd4bf] z-20"
+              />
+            </div>
+
+            {/* Crosshairs */}
+            <div className="absolute w-[360px] h-px bg-zinc-800" />
+            <div className="absolute h-[360px] w-px bg-zinc-800" />
+          </div>
+
+          {/* Right Panel Systems */}
+          <div className="space-y-6">
+            {systems.slice(2, 4).map((sys, idx) => (
+              <SystemCard key={sys.id} sys={sys} delay={(idx + 2) * 0.2} />
+            ))}
+          </div>
+
+        </div>
+
+        {/* Bottom Raw Data Ticker */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-espresso-600/50 pt-12"
+          className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-1 border border-zinc-800 bg-zinc-900 p-1"
         >
           {[
-            { value: '8g', label: 'Total Weight' },
-            { value: '2.55mm', label: 'Profile Height' },
-            { value: '±0.1°C', label: 'Temperature Accuracy' },
-            { value: 'BLE 5.3', label: 'Wireless Standard' },
-          ].map((s) => (
-            <div key={s.label} className="text-center">
-              <p className="font-serif text-3xl text-espresso-100">{s.value}</p>
-              <p className="mt-1 font-sans text-xs text-espresso-500 tracking-wide">{s.label}</p>
+            { label: 'Total Weight', val: '4.0 - 6.0g' },
+            { label: 'Profile Height', val: '2.55mm' },
+            { label: 'Temp Delta', val: '±0.1°C' },
+            { label: 'Transmission', val: 'BLE 5.3' },
+          ].map((stat, i) => (
+            <div key={i} className="bg-zinc-950 p-6 text-center group hover:bg-zinc-900 transition-colors">
+              <p className="font-mono text-2xl text-white group-hover:text-teal-400 transition-colors">{stat.val}</p>
+              <p className="mt-2 font-mono text-[9px] text-zinc-500 uppercase tracking-widest">{stat.label}</p>
             </div>
           ))}
         </motion.div>
+
       </div>
     </section>
+  );
+}
+
+// Sub-component for the futuristic HUD cards
+function SystemCard({ sys, delay }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: sys.id.includes('01') || sys.id.includes('02') ? -30 : 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay }}
+      className="relative bg-zinc-900/50 backdrop-blur-md border border-zinc-800 p-6 hover:border-teal-500/50 transition-colors group overflow-hidden"
+    >
+      {/* Corner Brackets for HUD look */}
+      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-teal-500/50" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-teal-500/50" />
+
+      <div className="flex items-center justify-between mb-6 border-b border-zinc-800 pb-4">
+        <div className="flex items-center gap-3">
+          <sys.icon size={16} className="text-teal-500" />
+          <h3 className="font-sans text-sm font-semibold tracking-wide text-white uppercase">{sys.category}</h3>
+        </div>
+        <span className="font-mono text-[10px] text-zinc-600 group-hover:text-teal-400 transition-colors">
+          [{sys.id}]
+        </span>
+      </div>
+      
+      <ul className="space-y-3">
+        {sys.items.map((item, i) => (
+          <li key={i} className="flex justify-between items-center font-mono text-xs">
+            <span className="text-zinc-500">{item.label}</span>
+            <span className="text-zinc-300 border-b border-zinc-800 border-dashed pb-0.5 group-hover:text-white transition-colors">{item.val}</span>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
   );
 }

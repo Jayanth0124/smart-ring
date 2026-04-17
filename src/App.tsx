@@ -1,32 +1,34 @@
 import Navbar from './components/sections/Navbar';
 import Hero from './components/sections/Hero';
-import FeatureShowcase from './components/sections/FeatureShowcase';
-import LifestyleVideo from './components/sections/LifestyleVideo';
-import GalleryScroll from './components/sections/GalleryScroll';
-import TechSpecs from './components/sections/TechSpecs';
+import PressReel from './components/sections/PressReel'; // NEW: Corporate Trust
+import Manifesto from './components/sections/Manifesto'; // Massively Expanded Philosophy
+import DetailedFeatures from './components/sections/DetailedFeatures'; // Upgraded with Icons & Text
+import MaterialScience from './components/sections/MaterialScience'; // NEW: Deep Dive
+import DailyRhythm from './components/sections/DailyRhythm';
+import SmartCoaching from './components/sections/SmartCoaching';
+import TechnicalSpecs from './components/sections/TechnicalSpecs';
 import SizingKit from './components/sections/SizingKit';
 import Testimonials from './components/sections/Testimonials';
-import ExpertAdvisory from './components/sections/ExpertAdvisory';
 import FAQ from './components/sections/FAQ';
 import Footer from './components/sections/Footer';
 
 export default function App() {
   return (
-    <div className="relative font-sans bg-espresso-50 antialiased w-full">
+    <div className="relative font-sans bg-white antialiased w-full text-zinc-900">
       <Navbar />
-      
       <main className="relative z-0">
         <Hero />
-        <FeatureShowcase />
-        <LifestyleVideo />
-        <GalleryScroll />
-        <TechSpecs />
+        <PressReel />
+        <Manifesto />
+        <DetailedFeatures />
+        <MaterialScience />
+        <DailyRhythm />
+        <SmartCoaching />
+        <TechnicalSpecs />
         <SizingKit />
         <Testimonials />
-        <ExpertAdvisory />
         <FAQ />
       </main>
-      
       <Footer />
     </div>
   );

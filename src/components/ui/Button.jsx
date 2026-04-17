@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 
 const variants = {
-  primary: 'bg-espresso-800 text-espresso-50 border border-espresso-800 hover:bg-espresso-700',
-  secondary: 'bg-transparent text-espresso-800 border border-espresso-800 hover:bg-espresso-100',
-  ghost: 'bg-transparent text-espresso-700 border border-transparent hover:border-espresso-300 hover:bg-espresso-100',
+  primary: 'bg-teal-600 text-white hover:bg-teal-700 shadow-sm',
+  secondary: 'bg-transparent text-zinc-900 border-2 border-zinc-200 hover:border-zinc-900 hover:bg-zinc-50',
+  ghost: 'bg-transparent text-zinc-600 border border-transparent hover:bg-zinc-100',
 };
 
 const sizes = {
@@ -20,7 +20,7 @@ export default function Button({ variant = 'primary', size = 'md', children, cla
       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
       className={`
         inline-flex items-center justify-center gap-2 font-sans font-medium
-        tracking-wide rounded-none transition-colors duration-200 cursor-pointer
+        tracking-wide rounded-full transition-colors duration-200 cursor-pointer
         ${variants[variant]} ${sizes[size]} ${className}
       `}
       {...props}
